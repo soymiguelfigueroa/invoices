@@ -1,5 +1,12 @@
 <?php
 
+use App\Controller\IndexController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Route;
+use Symfony\Component\Routing\RouteCollection;
+use Symfony\Component\Routing\RequestContext;
+use Symfony\Component\Routing\Matcher\UrlMatcher;
+
 // Loading .env content
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../../');
 $dotenv->load();
@@ -35,6 +42,28 @@ $conn = new mysqli($servername, $username, $password);
 
 // Check connection
 if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
+  die("Connection with database failed: " . $conn->connect_error);
 }
-echo "Connected successfully";
+
+$routes = new RouteCollection();
+
+$route = new Route('/', ['_controller' => IndexController::class, '_action' => 'index']);
+$routes->add('index', $route);
+
+$route = new Route('/test', ['_controller' => IndexController::class, '_action' => 'test']);
+$routes->add('test', $route);
+
+$context = new RequestContext();
+$context->fromRequest(Request::createFromGlobals());
+
+$matcher = new UrlMatcher($routes, $context);
+
+$parameters = $matcher->match($context->getPathInfo());
+
+$controllerInfo = explode('::', $parameters['_controller']);
+
+$controller = new $controllerInfo[0];
+
+$action = $parameters['_action'];
+
+$controller->$action();
