@@ -26,7 +26,7 @@ if ($dotenv->required('APP_DEBUG')->isBoolean()) {
     }
 }
 
-$servername = $_ENV['DB_DATABASE'];
+$servername = $_ENV['DB_HOST'];
 $username = $_ENV['DB_USER'];
 $password = $_ENV['DB_PASSWORD'];
 
