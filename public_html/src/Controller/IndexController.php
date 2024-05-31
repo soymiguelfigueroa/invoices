@@ -14,8 +14,8 @@ class IndexController
         echo 'Hello test!';
     }
 
-    public function gret($name)
+    public function greet($name)
     {
-        // TODO: implement parameters for path
+        debug($name);
     }
 }

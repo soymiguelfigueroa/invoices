@@ -45,6 +45,7 @@ if ($conn->connect_error) {
   die("Connection with database failed: " . $conn->connect_error);
 }
 
+// Routing system
 $routes = new RouteCollection();
 
 $route = new Route('/', ['_controller' => IndexController::class, '_action' => 'index']);
@@ -52,6 +53,9 @@ $routes->add('index', $route);
 
 $route = new Route('/test', ['_controller' => IndexController::class, '_action' => 'test']);
 $routes->add('test', $route);
+
+$route = new Route('/greet/{name}', ['_controller' => IndexController::class, '_action' => 'greet']);
+$routes->add('greet', $route);
 
 $context = new RequestContext();
 $context->fromRequest(Request::createFromGlobals());
@@ -66,4 +70,6 @@ $controller = new $controllerInfo[0];
 
 $action = $parameters['_action'];
 
-$controller->$action();
+unset($parameters['_controller'], $parameters['_action'], $parameters['_route']);
+
+$controller->$action(...$parameters);
