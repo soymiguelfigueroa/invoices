@@ -1,10 +1,13 @@
 <?php
 
+// Requiring composer autoload
 require 'vendor/autoload.php';
 
+// Loading .env content
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
+// Adding debug functions
 if ($dotenv->required('APP_DEBUG')->isBoolean()) {
     if (!function_exists('debug')) {
         function debug($expression) {
