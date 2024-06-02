@@ -2,20 +2,34 @@
 
 namespace App\Controller;
 
+use Symfony\Component\HttpFoundation\JsonResponse;
+
 class IndexController
 {
     public function index()
     {
-        echo 'Hello!';
+        $response = new JsonResponse();
+        $response->setData(array(
+            'data' => 'Hello'
+        ));
+        $response->send();
     }
 
     public function test()
     {
-        echo 'Hello test!';
+        $response = new JsonResponse();
+        $response->setData(array(
+            'data' => 'Hello test!'
+        ));
+        $response->send();
     }
 
     public function greet($name)
     {
-        debug($name);
+        $response = new JsonResponse();
+        $response->setData(array(
+            'data' => "Hello $name"
+        ));
+        $response->send();
     }
 }
