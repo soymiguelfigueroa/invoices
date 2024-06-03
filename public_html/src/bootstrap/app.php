@@ -57,11 +57,11 @@ $route = new Route('/greet/{name}', ['_controller' => IndexController::class, '_
 $routes->add('greet', $route);
 
 $route = new Route('/api/v1', ['_controller' => ApiIndexController::class, '_action' => 'index']);
-$routes->add('index', $route);
+$routes->add('api_index', $route);
 $route = new Route('/api/v1/test', ['_controller' => ApiIndexController::class, '_action' => 'test']);
-$routes->add('test', $route);
+$routes->add('api_test', $route);
 $route = new Route('/api/v1/greet/{name}', ['_controller' => ApiIndexController::class, '_action' => 'greet']);
-$routes->add('greet', $route);
+$routes->add('api_greet', $route);
 
 $context = new RequestContext();
 $context->fromRequest(Request::createFromGlobals());
