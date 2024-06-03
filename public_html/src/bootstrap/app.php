@@ -1,7 +1,7 @@
 <?php
 
-use App\Controller\IndexController;
-use App\Controller\IndexController as ApiIndexController;
+use App\Controller\HomeController;
+use App\Controller\HomeController as ApiHomeController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
@@ -49,18 +49,18 @@ if ($conn->connect_error) {
 // Routing system
 $routes = new RouteCollection();
 
-$route = new Route('/', ['_controller' => IndexController::class, '_action' => 'index']);
+$route = new Route('/', ['_controller' => HomeController::class, '_action' => 'index']);
 $routes->add('index', $route);
-$route = new Route('/test', ['_controller' => IndexController::class, '_action' => 'test']);
+$route = new Route('/test', ['_controller' => HomeController::class, '_action' => 'test']);
 $routes->add('test', $route);
-$route = new Route('/greet/{name}', ['_controller' => IndexController::class, '_action' => 'greet']);
+$route = new Route('/greet/{name}', ['_controller' => HomeController::class, '_action' => 'greet']);
 $routes->add('greet', $route);
 
-$route = new Route('/api/v1', ['_controller' => ApiIndexController::class, '_action' => 'index']);
+$route = new Route('/api/v1', ['_controller' => ApiHomeController::class, '_action' => 'index']);
 $routes->add('api_index', $route);
-$route = new Route('/api/v1/test', ['_controller' => ApiIndexController::class, '_action' => 'test']);
+$route = new Route('/api/v1/test', ['_controller' => ApiHomeController::class, '_action' => 'test']);
 $routes->add('api_test', $route);
-$route = new Route('/api/v1/greet/{name}', ['_controller' => ApiIndexController::class, '_action' => 'greet']);
+$route = new Route('/api/v1/greet/{name}', ['_controller' => ApiHomeController::class, '_action' => 'greet']);
 $routes->add('api_greet', $route);
 
 $context = new RequestContext();
