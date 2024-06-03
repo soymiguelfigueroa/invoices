@@ -1,7 +1,7 @@
 <?php
 
 use App\Controller\HomeController;
-use App\Controller\HomeController as ApiHomeController;
+use App\Controller\Api\v1\HomeController as ApiHomeController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
