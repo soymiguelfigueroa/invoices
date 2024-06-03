@@ -1,6 +1,7 @@
 <?php
 
 use App\Controller\IndexController;
+use App\Controller\IndexController as ApiIndexController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
@@ -50,11 +51,16 @@ $routes = new RouteCollection();
 
 $route = new Route('/', ['_controller' => IndexController::class, '_action' => 'index']);
 $routes->add('index', $route);
-
 $route = new Route('/test', ['_controller' => IndexController::class, '_action' => 'test']);
 $routes->add('test', $route);
-
 $route = new Route('/greet/{name}', ['_controller' => IndexController::class, '_action' => 'greet']);
+$routes->add('greet', $route);
+
+$route = new Route('/api/v1', ['_controller' => ApiIndexController::class, '_action' => 'index']);
+$routes->add('index', $route);
+$route = new Route('/api/v1/test', ['_controller' => ApiIndexController::class, '_action' => 'test']);
+$routes->add('test', $route);
+$route = new Route('/api/v1/greet/{name}', ['_controller' => ApiIndexController::class, '_action' => 'greet']);
 $routes->add('greet', $route);
 
 $context = new RequestContext();
