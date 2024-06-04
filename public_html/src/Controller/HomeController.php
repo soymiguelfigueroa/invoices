@@ -13,6 +13,7 @@ class HomeController
         $loader = new \Twig\Loader\FilesystemLoader('src/templates/');
 
         $this->twig = new \Twig\Environment($loader);
+        $this->twig->addGlobal('app_name', $_ENV['APP_NAME']);
     }
     
     public function index()
